@@ -9,8 +9,13 @@
     </head>
     <body>
 
-        {% include 'navbar.html.twig' %}
+        {% include 'common/navbar.html.twig' %}
+
+        {% include 'common/flashes.html.twig' %}
+
         {% block body %}{% endblock %}
+
+        {% include 'common/footer.html.twig' %}
 
         <script src="/js/jquery.slim.min.js"></script>
         <script src="/js/popper.min.js"></script>
