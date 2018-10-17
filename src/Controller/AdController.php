@@ -24,10 +24,8 @@ class AdController extends Controller
     /**
      * @Route("/ads/{slug}", name="ads_show")
      */
-    public function show($slug, AdRepository $repo)
+    public function show(Ad $ad)
     {
-        $ad = $repo->findOneBySlug($slug);
-
         return $this->render('ad/show.html.twig', [
             'ad' => $ad
         ]);
