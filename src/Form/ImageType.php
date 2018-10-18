@@ -6,14 +6,32 @@ use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ImageType extends AbstractType
 {
+
+    /**
+     * Configuration champ de formulaire des images
+     *
+     * @param string $placeholder
+     * @return array
+     */
+    private function getPlaceholderForm($placeholder)
+    {
+        return [
+            'attr' => [
+                'placeholder' => $placeholder
+            ]
+        ];
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url')
-            ->add('caption')
+            ->add('url', UrlType::class, $this->getPlaceholderForm("URL de l'image"))
+            ->add('caption', TextType::class, $this->getPlaceholderForm("Titre de l'image"))
         ;
     }
 
