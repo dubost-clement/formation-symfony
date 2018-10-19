@@ -77,6 +77,7 @@ class Ad
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
+     * @Assert\Valid
      */
     private $images;
 

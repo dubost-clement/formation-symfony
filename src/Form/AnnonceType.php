@@ -45,7 +45,8 @@ class AnnonceType extends AbstractType
             ->add('price', MoneyType::class, $this->getFormConfiguration("Prix par nuit", "Indiquez le prix par nuit"))
             ->add('images', CollectionType::class, [
                 'entry_type' => ImageType::class,
-                'allow_add' => true
+                'allow_add' => true,
+                'allow_delete' => true
             ]) 
         ;
     }
