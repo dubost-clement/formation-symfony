@@ -7,10 +7,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity(
+ *  fields={"email"},
+ *  message="Cette adresse email est déjà utilisée, merci de la modifier !"
+ * )
  */
 class User implements UserInterface
 {
@@ -23,16 +29,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner votre prénom")
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez renseigner votre nom !")
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Veuillez renseigner un email valide !")
      */
     private $email;
 
@@ -47,12 +56,29 @@ class User implements UserInterface
     private $hash;
 
     /**
+     * @Assert\EqualTo(propertyPath="hash", message="La confirmation du mot de passe est différente du mot de passe que vous avez entré !")
+     */
+    private $passwordConfirm;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *  min = 10,
+     *  max = 255,
+     *  minMessage = "Votre introduction doit faire plus de {{ limit }} caractères !",
+     *  maxMessage = "Votre introduction ne doit pas faire plus de {{ limit }} caractères !"
+     *)
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *  min = 100,
+     *  max = 255,
+     *  minMessage = "Votre description doit faire plus de {{ limit }} caractères !",
+     *  maxMessage = "Votre description ne doit pas faire plus de {{ limit }} caractères !"
+     *)
      */
     private $description;
 
@@ -145,6 +171,18 @@ class User implements UserInterface
     public function setHash(string $hash): self
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    public function getPasswordConfirm()
+    {
+        return $this->passwordConfirm;
+    }
+ 
+    public function setPasswordConfirm($passwordConfirm)
+    {
+        $this->passwordConfirm = $passwordConfirm;
 
         return $this;
     }
