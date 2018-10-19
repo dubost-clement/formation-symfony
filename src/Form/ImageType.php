@@ -3,29 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Image;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class ImageType extends AbstractType
+class ImageType extends ApplicationType
 {
-
-    /**
-     * Configuration champ de formulaire des images
-     *
-     * @param string $placeholder
-     * @return array
-     */
-    private function getPlaceholderForm($placeholder)
-    {
-        return [
-            'attr' => [
-                'placeholder' => $placeholder
-            ]
-        ];
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
