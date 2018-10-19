@@ -1,4 +1,5 @@
 {% block _annonce_images_widget %}
+<div class="bg-secondary p-3">
     <p>Vous poucez ajouter d'autres images à votre annonce</p>
     {{ form_widget(form) }}
 
@@ -7,6 +8,7 @@
     <div class="form-group">
         <button type="button" id="add-image" class="btn btn-primary">Ajouter une image</button>
     </div>
+</div>
 {% endblock %}
 
 {% block _annonce_images_entry_row %}
