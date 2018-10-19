@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class AdController extends Controller
 {
     /**
+     * Permet d'afficher la liste des annonces
      * @Route("/ads", name="ads_index")
      */
     public function index(AdRepository $repo)
@@ -25,6 +26,7 @@ class AdController extends Controller
     }
 
     /**
+     * Permet d'afficher le formulaire de création d'annonce
      * @Route("/ads/new", name="ads_create")
      */
     public function create(Request $request, ObjectManager $manager)
@@ -32,7 +34,6 @@ class AdController extends Controller
         $ad = new Ad();
 
         $form = $this->createForm(AnnonceType::class, $ad);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -47,7 +48,7 @@ class AdController extends Controller
 
             $this->addFlash(
                 'success',
-                "Votre annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrés ! "
+                "Votre annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée ! "
             );
 
             return $this->redirectToRoute('ads_show', [
@@ -61,6 +62,42 @@ class AdController extends Controller
     }
 
     /**
+     * Permet d'afficher le formulaire d'édition d'annonce
+     * @Route("/ads/{slug}/edit", name="ads_edit")
+     */
+    public function edit(Ad $ad, Request $request, ObjectManager $manager)
+    {
+        $form = $this->createForm(AnnonceType::class, $ad);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            foreach($ad->getImages() as $image) {
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Vos modifications de l'annonce <strong>{$ad->getTitle()}</strong> ont bien été enregistrées ! "
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/edit.html.twig', [
+            'form' => $form->createView(),
+            'ad' => $ad
+        ]);
+    }
+
+    /**
+     * Permet d'afficher une seule annonce
      * @Route("/ads/{slug}", name="ads_show")
      */
     public function show(Ad $ad)

@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'une annonce{% endblock %}
+{% block title %}Modification d'une annonce{% endblock %}
 {% form_theme form 'ad/_collection-form.html.twig' %}
 
 {% block body %}
 <div class="container">
-    <h1>Créer une nouvelle annonce</h1>
+    <h1>Modifier l'annonce: {{ ad.title }}</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-primary"> Créer l'annonce</button>
+        <button type="submit" class="btn btn-primary">Modifier l'annonce</button>
     {{ form_end(form) }}
 
 </div>

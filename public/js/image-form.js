@@ -14,4 +14,10 @@ function handleDeleteButtons() {
     });
 }
 
+function updateCounter() {
+    const count = +$('#annonce_images div.form-group').length
+    $('#widgets-counter').val(count);
+}
+
+updateCounter();
 handleDeleteButtons();
