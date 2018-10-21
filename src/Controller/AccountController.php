@@ -113,9 +113,10 @@ class AccountController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            if(!password_verify($passwordUpdate->getOldPassword(), $user->getHash())) {
-
-            } else {
+            if(!$encoder->isPasswordValid($user,$passwordUpdate->getOldPassword()) ){
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe que vous avez tapé ne
+                    correspond pas à votre mot de passe actuel !"));
+            }else {
                 $newPassword = $passwordUpdate->getNewPassword();
                 $hash = $encoder->encodePassword($user, $newPassword);
 
