@@ -93,6 +93,14 @@ class User implements UserInterface
     private $ads;
 
     /**
+     * Permet de récupérer le prénom et le nom
+     */
+    public function getFullname()
+    {
+        return "{$this->firstName} {$this->lastName}";
+    }
+
+    /**
      * Permet d'initialiser le slug
      * @ORM\PrePersist
      * @ORM\PreUpdate
