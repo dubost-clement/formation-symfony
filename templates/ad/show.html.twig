@@ -50,6 +50,23 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+            <hr>
+
+            {% if ad.comments | length > 0 %}
+                <h2 class="mb-3">Commentaires de nos voyageurs :</h2>
+                {% for comment in ad.comments %}
+                    <div class="bg-light rounded mb-3 p-3">
+                        <strong>{{ comment.author.fullname }}</strong> a commenté :
+                        <blockquote>
+                            {{ comment.content }}
+                        </blockquote>
+                        <strong>Note donnée par {{ comment.author.fullname }} :</strong>
+                        {% include 'common/rating.html.twig' with {'rating':comment.rating} %}
+                    </div>
+                {% endfor %}
+                {% else %}
+                <h2>Cette annonce n'a pas encore de commentaire</h2>
+            {% endif %}
         </div>
 
         <div class="col">
