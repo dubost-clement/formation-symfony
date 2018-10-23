@@ -29,10 +29,17 @@ class BookingController extends AbstractController
                     ->setAd($ad)
             ;
 
-            $manager->persist($booking);
-            $manager->flush();
-
-            return $this->redirectToRoute('booking_show', ['id' => $booking->getId(), 'withAlert' => true]);
+            if(!$booking->isBookableDates()) {
+                $this->addFlash(
+                    'warning',
+                    "Les dates que vous avez choisi ne sont pas disponibles !"
+                );
+            } else {
+                $manager->persist($booking);
+                $manager->flush();
+    
+                return $this->redirectToRoute('booking_show', ['id' => $booking->getId(), 'withAlert' => true]);
+            }
         }
 
         return $this->render('booking/book.html.twig', [
