@@ -4,11 +4,38 @@
 
 {% block body %}
     <div class="container">
-        <h1>Inscrivez vous sur notre site</h1>
-
+        <h1 class="my-5">Inscrivez vous sur notre site</h1>
         {{ form_start(form) }}
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-light">
+                        <h2>Informations générales</h2>
+                        <hr>
+                        {{ form_row(form.firstName) }}
+                        {{ form_row(form.lastName) }}
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.picture) }}
+                    </div>
+
+                    <div class="alert alert-light">
+                        <h2>Mot de passe</h2>
+                        <hr>
+                        {{ form_row(form.hash) }}
+                        {{ form_row(form.passwordConfirm) }}
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="alert alert-light">
+                        <h2>Détails</h2>
+                        <hr>
+                        {{ form_row(form.introduction) }}
+                        {{ form_row(form.description) }}
+                    </div>
+                </div>
+            </div>
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-success">Confirmez</button>
+        <button type="submit" class="btn btn-success mt-3">Confirmez</button>
         {{ form_end(form) }}
 
     </div>
