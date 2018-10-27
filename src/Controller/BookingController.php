@@ -10,6 +10,7 @@ use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -53,7 +54,7 @@ class BookingController extends AbstractController
     /**
      * Permet d'afficher la page d'une réservation
      * @Route("/booking/{id}", name="booking_show")
-     * @IsGranted("ROLE_USER")
+     * @Security("is_granted('ROLE_USER') and user === booking.getBooker()", message="Vous ne pouvez pas accéder à une réservation qui n'est pas la votre !")
      */
     public function show(Booking $booking, Request $request, ObjectManager $manager)
     {
