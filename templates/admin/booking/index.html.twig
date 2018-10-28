@@ -1,0 +1,37 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des réservations{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5 text-center">Administration des réservations</h1>
+        <div class="responsive-table-line">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Auteur</th>
+                    <th>Annonce</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td data-label="Id">{{ booking.id }}</td>
+                    <td data-label="Date">{{ booking.createdAt | date('d/m/Y') }}</td>
+                    <td data-label="Auteur">{{ booking.booker.fullName }}</td>
+                    <td data-label="Annonce">{{ booking.ad.title}}</td>
+                    <td data-label="Action">
+                        <a href="#" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+{% endblock %}
