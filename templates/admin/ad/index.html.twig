@@ -6,34 +6,36 @@
     <div class="container-fluid">
         <h1 class="my-5 text-center">Gestion des annonces</h1>
         <div class="responsive-table-line">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Titre</th>
-                    <th>Auteur</th>
-                    <th>Réservations</th>
-                    <th>Note</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Réservations</th>
+                        <th>Note</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                {% for ad in ads %}
-                <tr>
-                    <td data-label="Id">{{ ad.id }}</td>
-                    <td data-label="Titre">{{ ad.title }}</td>
-                    <td data-label="Auteur">{{ ad.author.fullName }}</td>
-                    <td data-label="Réservations">{{ ad.bookings | length }}</td>
-                    <td data-label="Note">{{ ad.avgRatings | number_format(1, ',' , ' ')}}</td>
-                    <td data-label="Actions">
-                        <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                        <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                <tbody>
+                    {% for ad in pagination.data %}
+                    <tr>
+                        <td data-label="Id">{{ ad.id }}</td>
+                        <td data-label="Titre">{{ ad.title }}</td>
+                        <td data-label="Auteur">{{ ad.author.fullName }}</td>
+                        <td data-label="Réservations">{{ ad.bookings | length }}</td>
+                        <td data-label="Note">{{ ad.avgRatings | number_format(1, ',' , ' ')}}</td>
+                        <td data-label="Actions">
+                            <a href="{{ path('admin_ads_edit', {'id': ad.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="{{ path('admin_ads_delete', {'id': ad.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+        {% include 'admin/common/pagination.html.twig' with {'route': 'admin_ads_index'} %}
     </div>
 {% endblock %}

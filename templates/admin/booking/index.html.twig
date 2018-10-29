@@ -6,34 +6,36 @@
     <div class="container-fluid">
         <h1 class="my-5 text-center">Administration des réservations</h1>
         <div class="responsive-table-line">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Date</th>
-                    <th>Auteur</th>
-                    <th>Annonce</th>
-                    <th>Montant</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Auteur</th>
+                        <th>Annonce</th>
+                        <th>Montant</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                {% for booking in bookings %}
-                <tr>
-                    <td data-label="Id">{{ booking.id }}</td>
-                    <td data-label="Date">{{ booking.createdAt | date('d/m/Y') }}</td>
-                    <td data-label="Auteur">{{ booking.booker.fullName }}</td>
-                    <td data-label="Annonce">{{ booking.ad.title}}</td>
-                    <td data-label="Montant">{{ booking.amount | number_format(2, ",", " ")}} &euro;</td>
-                    <td data-label="Action">
-                        <a href="{{ path('admin_bookings_edit', {'id' : booking.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                        <a href="{{ path('admin_bookings_delete', {'id' : booking.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                <tbody>
+                    {% for booking in pagination.data %}
+                    <tr>
+                        <td data-label="Id">{{ booking.id }}</td>
+                        <td data-label="Date">{{ booking.createdAt | date('d/m/Y') }}</td>
+                        <td data-label="Auteur">{{ booking.booker.fullName }}</td>
+                        <td data-label="Annonce">{{ booking.ad.title}}</td>
+                        <td data-label="Montant">{{ booking.amount | number_format(2, ",", " ")}} &euro;</td>
+                        <td data-label="Action">
+                            <a href="{{ path('admin_bookings_edit', {'id' : booking.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="{{ path('admin_bookings_delete', {'id' : booking.id}) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+        {% include 'admin/common/pagination.html.twig' with {'route': 'admin_bookings_index'} %}
     </div>
 {% endblock %}
