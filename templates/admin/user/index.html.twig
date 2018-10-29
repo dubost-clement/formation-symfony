@@ -29,7 +29,7 @@
                     <td data-label="Nom">{{ user.lastName }}</td>
                     <td data-label="Email">{{ user.email}}</td>
                     <td data-label="Action">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ path("admin_users_edit", {'id': user.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                         <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
