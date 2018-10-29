@@ -6,36 +6,38 @@
     <div class="container-fluid">
         <h1 class="my-5 text-center">Administration des utilisateurs</h1>
         <div class="responsive-table-line">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Avatar</th>
-                    <th>Prénom</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Avatar</th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td data-label="Id">{{ user.id }}</td>
-                    <td data-label="Avatar">
-                        <img src="{{ user.picture }}" class="avatar avatar-mini" alt="image de profil de {{ user.fullName }}">
-                    </td>
-                    <td data-label="Prénom">{{ user.firstName}}</td>
-                    <td data-label="Nom">{{ user.lastName }}</td>
-                    <td data-label="Email">{{ user.email}}</td>
-                    <td data-label="Action">
-                        <a href="{{ path("admin_users_edit", {'id': user.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                <tbody>
+                    {% for user in pagination.data %}
+                    <tr>
+                        <td data-label="Id">{{ user.id }}</td>
+                        <td data-label="Avatar">
+                            <img src="{{ user.picture }}" class="avatar avatar-mini" alt="image de profil de {{ user.fullName }}">
+                        </td>
+                        <td data-label="Prénom">{{ user.firstName}}</td>
+                        <td data-label="Nom">{{ user.lastName }}</td>
+                        <td data-label="Email">{{ user.email}}</td>
+                        <td data-label="Action">
+                            <a href="{{ path("admin_users_edit", {'id': user.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
+        {{ pagination.display() }}
     </div>
 {% endblock %}
