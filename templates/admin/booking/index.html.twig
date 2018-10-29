@@ -25,7 +25,7 @@
                     <td data-label="Auteur">{{ booking.booker.fullName }}</td>
                     <td data-label="Annonce">{{ booking.ad.title}}</td>
                     <td data-label="Action">
-                        <a href="#" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                        <a href="{{ path('admin_bookings_edit', {'id' : booking.id}) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
                         <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
