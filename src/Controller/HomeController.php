@@ -13,13 +13,12 @@ class HomeController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function home (AdRepository $adRepo, UserRepository $userRepo) {
-        dump($adRepo->findBestAds(3));
+    public function home (AdRepository $adRepo, UserRepository $userRepo) 
+    {
+
         return $this->render('home.html.twig', [
             'ads' => $adRepo->findBestAds(3),
             'users' => $userRepo->findBestUsers(2)
         ]);
     }
 }
-
-?>

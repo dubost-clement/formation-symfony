@@ -1,3 +1,117 @@
-body {
-    background-color: lightgray;
+@import url('./bootstrap.min.css');
+
+.container,
+.container-fluid {
+    margin-top: 100px;
+}
+
+i.menu-icons {
+    margin-right: 5px;
+}
+
+.ad-title {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    padding: 2em;
+    margin-top: 59px;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.ad-title .btn {
+    margin-top: 2em;
+    font-size: 1.3em;
+    line-height: 1.3em;
+}
+
+.carousel-caption {
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.avatar-mini {
+    max-width: 24px;
+    max-height: 24px;
+}
+
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+    color: red !important;
+}
+
+span.rating i {
+    color: goldenrod;
+}
+
+.alert a {
+    text-decoration: none;
+}
+
+.alert .btn {
+    color: white;
+}
+
+/* Tableau Responsive Administration */
+@media screen and (max-width: 800px) {
+    .responsive-table-line td:before {
+        content: attr(data-label);
+    }
+
+    .responsive-table-line table,
+    .responsive-table-line thead,
+    .responsive-table-line tbody,
+    .responsive-table-line th,
+    .responsive-table-line td,
+    .responsive-table-line tr {
+        display: block;
+        
+    }
+
+    .responsive-table-line thead {
+        display: none;
+    }
+
+    .responsive-table-line td {
+        padding-left: 150px;
+        position: relative;
+        margin-top: -1px;
+        background: #FFF;
+        border: 1px solid black;
+    }
+
+    .responsive-table-line td:nth-child(odd) {
+        background-color: #eee;
+    }
+
+    .responsive-table-line td:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 130px;
+        bottom: 0;
+        padding: 10px;
+        height: 100%;
+        border-right: 1px solid black;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .responsive-table-line td:before:nth-child(odd) {
+        background-color: #eee;
+    }
+
+    .responsive-table-line tr {
+        margin-bottom: 4rem;
+    }
 }
