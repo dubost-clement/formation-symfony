@@ -1,0 +1,6 @@
+fos_ck_editor:
+  configs:
+    my_config:
+      toolbar: 'standard'
+      uiColor: '#ffffff'
+      language: fr

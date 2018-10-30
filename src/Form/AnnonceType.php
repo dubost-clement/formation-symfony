@@ -6,6 +6,7 @@ use App\Entity\Ad;
 use App\Form\ImageType;
 use App\Form\ApplicationType;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -24,7 +25,9 @@ class AnnonceType extends ApplicationType
             ->add('title', TextType::class, $this->getFormConfiguration("Titre", "Titre de votre annonce"))
             ->add('coverImage', UrlType::class, $this->getFormConfiguration("Image principale", "Donnez l'adresse d'une image"))
             ->add('introduction', TextType::class, $this->getFormConfiguration("Introduction", "Donnez une description globale de l'annonce"))
-            ->add('content', TextareaType::class, $this->getFormConfiguration("Description", "Tapez une description qui donne  envie de venir chez vous"))
+            ->add('content', CKEditorType::class, $this->getFormConfiguration("Description", "Tapez une description qui donne  envie de venir chez vous", [
+                'config_name' => 'my_config'
+            ]))
             ->add('rooms', IntegerType::class, $this->getFormConfiguration("Nombre de chambres", "Donnez le nombre de chambres disponibles"))
             ->add('price', MoneyType::class, $this->getFormConfiguration("Prix par nuit", "Indiquez le prix par nuit"))
             ->add('images', CollectionType::class, [
