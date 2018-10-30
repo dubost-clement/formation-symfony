@@ -9,12 +9,12 @@
                 <div class="card bg-primary text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-3">
                                 <i class="fas fa-users fa-3x"></i>
                             </div>
 
                             <div class="col">
-                                <h4 class="card-title">100 utilisateurs</h4>
+                                <h4 class="card-title">{{ stats.users }} utilisateurs</h4>
                             </div>
                         </div>
                     </div>
@@ -25,12 +25,12 @@
                 <div class="card bg-dark text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-3">
                                 <i class="fas fa-hotel fa-3x"></i>
                             </div>
 
                             <div class="col">
-                                <h4 class="card-title">50 annonces</h4>
+                                <h4 class="card-title">{{ stats.ads }} annonces</h4>
                             </div>
                         </div>
                     </div>
@@ -41,12 +41,12 @@
                 <div class="card bg-warning text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-3">
                                 <i class="fas fa-folder fa-3x"></i>
                             </div>
 
                             <div class="col">
-                                <h4 class="card-title">150 réservations</h4>
+                                <h4 class="card-title">{{ stats.bookings }} réservations</h4>
                             </div>
                         </div>
                     </div>
@@ -57,12 +57,12 @@
                 <div class="card bg-success text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-3">
                                 <i class="fas fa-comments fa-3x"></i>
                             </div>
 
                             <div class="col">
-                                <h4 class="card-title">250 avis</h4>
+                                <h4 class="card-title">{{ stats.comments }} avis</h4>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
             <div class="col">
                 <div class="alert alert-success">
                     <h2 class="alert-heading my-3">Les annonces populaires</h2>
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Annonce</th>
@@ -83,11 +83,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for ad in best %}
                             <tr>
-                                <td>test</td>
-                                <td>toto</td>
-                                <td>4</td>
+                                <td>{{ ad.title }}</td>
+                                <td><img src="{{ad.picture}}" alt="" class="avatar avatar-mini"> {{ad.firstName}} {{ad.lastName}}</td>
+                                <td>{{ ad.rating | number_format(1, ",", " ") }}</td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -96,7 +98,7 @@
             <div class="col">
                 <div class="alert alert-danger">
                     <h2 class="alert-heading my-3">Les annonces impopulaires</h2>
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>Annonce</th>
@@ -105,11 +107,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for ad in worst %}
                             <tr>
-                                <td>test</td>
-                                <td>toto</td>
-                                <td>4</td>
+                                <td>{{ ad.title }}</td>
+                                <td><img src="{{ad.picture}}" alt="" class="avatar avatar-mini"> {{ad.firstName}} {{ad.lastName}}</td>
+                                <td>{{ ad.rating | number_format(1, ",", " ") }}</td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
