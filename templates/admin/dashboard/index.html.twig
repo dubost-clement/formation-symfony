@@ -4,9 +4,10 @@
 
 {% block body %}
     <div class="container-fluid">
+        <h1 class="my-5 text-center">Tableau de bord</h1>
         <div class="row">
             <div class="col-md-12 col-lg-3">
-                <div class="card bg-primary text-white mb-3 text-center">
+                <div class="card bg-warning text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3">
@@ -22,7 +23,7 @@
             </div>
 
             <div class="col-md-12 col-lg-3">
-                <div class="card bg-dark text-white mb-3 text-center">
+                <div class="card bg-info text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3">
@@ -54,7 +55,7 @@
             </div>
 
             <div class="col-md-12 col-lg-3">
-                <div class="card bg-success text-white mb-3 text-center">
+                <div class="card bg-info text-white mb-3 text-center">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3">
@@ -71,10 +72,10 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col">
+            <div class="col mt-5">
                 <div class="alert alert-success">
-                    <h2 class="alert-heading my-3">Les annonces populaires</h2>
-                    <table class="table table-striped">
+                    <h2 class="alert-heading my-3"><i class="fas fa-arrow-up"></i>Annonces populaires</h2>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Annonce</th>
@@ -95,10 +96,10 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="col mt-5">
                 <div class="alert alert-danger">
-                    <h2 class="alert-heading my-3">Les annonces impopulaires</h2>
-                    <table class="table table-striped">
+                    <h2 class="alert-heading my-3"><i class="fas fa-arrow-down"></i>Annonces impopulaires</h2>
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Annonce</th>
