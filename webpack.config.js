@@ -20,6 +20,8 @@ Encore
     .addStyleEntry('css/app', './assets/css/app.css')
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/ad', './assets/js/image-form.js')
+    .addEntry('js/places', './assets/js/places.js')
+    .addEntry('js/map', './assets/js/map.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

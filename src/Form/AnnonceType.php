@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -34,7 +35,10 @@ class AnnonceType extends ApplicationType
                 'entry_type' => ImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true
-            ]) 
+            ])
+            ->add('address', TextType::class, $this->getFormConfiguration("Adresse", "L'adresse de votre bien"))
+            ->add('lat', HiddenType::class, $this->getFormConfiguration("lat", "La lattitude"))
+            ->add('lng', HiddenType::class, $this->getFormConfiguration("lng", "la longitude"))   
         ;
     }
 

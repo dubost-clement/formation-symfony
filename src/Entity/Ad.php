@@ -98,6 +98,24 @@ class Ad
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vous devez saisir l'adresse de votre bien!")
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank()
+     */
+    private $lng;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -363,6 +381,42 @@ class Ad
                 $comment->setAd(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

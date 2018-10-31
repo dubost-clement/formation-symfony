@@ -84,6 +84,9 @@ class AppFixtures extends Fixture
             $coverImage = $faker->imageUrl(1000, 350);
             $introduction = $faker->paragraph(2);
             $content = '<p>' . join('</p><p>', $faker->paragraphs(5)). '</p>';
+            $address = $faker->address();
+            $lat = $faker->latitude($min = -90, $max = 90);
+            $lng = $faker->longitude($min = -180, $max = 180);
 
             $user = $users[mt_rand(0, count($users) -1 )];
 
@@ -94,6 +97,9 @@ class AppFixtures extends Fixture
                ->setPrice(mt_rand(40, 250))
                ->setRooms(mt_rand(1, 6))
                ->setAuthor($user)
+               ->setAddress($address)
+               ->setLat($lat)
+               ->setLng($lng)
             ;
 
             for ($j = 1; $j <= mt_rand(2, 5); $j++) { 
