@@ -78,6 +78,7 @@ class Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $coverImage;
 
@@ -284,17 +285,15 @@ class Ad
     /**
      * Set the value of imageFile
      *
-     * @param  File  $imageFile
+     * @param  File|\Symfony\Component\HttpFoundation\File\UploadedFile $imageFile
      *
-     * @return  self
      */ 
-    public function setImageFile(?File $imageFile)
+    public function setImageFile(?File $imageFile ): self
     {
         $this->imageFile = $imageFile;
         if ($this->imageFile instanceof UploadedFile) {
             $this->updatedAt = new \DateTime('now');
         }
-
         return $this;
     }
 
@@ -303,10 +302,9 @@ class Ad
         return $this->coverImage;
     }
 
-    public function setCoverImage(string $coverImage): self
+    public function setCoverImage(?string $coverImage): self
     {
         $this->coverImage = $coverImage;
-
         return $this;
     }
 
