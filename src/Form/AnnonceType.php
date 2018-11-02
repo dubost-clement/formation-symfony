@@ -10,6 +10,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -24,7 +25,7 @@ class AnnonceType extends ApplicationType
     {
         $builder
             ->add('title', TextType::class, $this->getFormConfiguration("Titre", "Titre de votre annonce"))
-            ->add('coverImage', UrlType::class, $this->getFormConfiguration("Image principale", "Donnez l'adresse d'une image"))
+            ->add('imageFile', FileType::class, $this->getFormConfiguration("Image principale", "Choisissez une image"))
             ->add('introduction', TextType::class, $this->getFormConfiguration("Introduction", "Donnez une description globale de l'annonce"))
             ->add('content', CKEditorType::class, $this->getFormConfiguration("Description", "Tapez une description qui donne  envie de venir chez vous", [
                 'config_name' => 'my_config'
