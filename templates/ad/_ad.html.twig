@@ -11,7 +11,7 @@
         </div>
 
         <a href="{{ url }}">
-            <img src="{{ vich_uploader_asset(ad, 'imageFile') }}" alt="image de l'appartement {{ ad.title }}" style="height: 200px; width: 100%; display: block">
+            <img src="{{vich_uploader_asset(ad, 'imageFile') | imagine_filter('thumb') }}" alt="image de l'appartement {{ ad.title }}" style="height: 200px; width: 100%; display: block">
         </a>
                     
         <div class="card-body">

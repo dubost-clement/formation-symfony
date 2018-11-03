@@ -71,6 +71,10 @@ class Ad
     private $content;
 
     /**
+     * @Assert\Image(
+     *  mimeTypes="image/jpeg",
+     *  mimeTypesMessage="Vous pouvez télécharger uniquement des images aux formats JPEG"
+     * )
      * @Vich\UploadableField(mapping="ads_image", fileNameProperty="coverImage")
      * @var File
      */

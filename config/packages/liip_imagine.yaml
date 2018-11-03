@@ -1,4 +1,5 @@
 liip_imagine:
+  driver: "gd"
   filter_sets:
     thumb:
       quality: 75
