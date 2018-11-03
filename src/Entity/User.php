@@ -9,16 +9,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  * @UniqueEntity(
  *  fields={"email"},
  *  message="Cette adresse email est déjà utilisée, merci de la modifier !"
  * )
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -44,6 +48,16 @@ class User implements UserInterface
      * @Assert\Email(message="Veuillez renseigner un email valide !")
      */
     private $email;
+
+    /**
+     * @Assert\Image(
+     *  mimeTypes="image/jpeg",
+     *  mimeTypesMessage="Vous pouvez télécharger uniquement des images aux formats JPEG"
+     * )
+     * @Vich\UploadableField(mapping="users_image", fileNameProperty="picture")
+     * @var File
+     */
+    private $pictureFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -106,6 +120,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updateAt;
 
     /**
      * Permet de récupérer le prénom et le nom
@@ -174,6 +193,31 @@ class User implements UserInterface
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    /**
+     * Permet de récupérer la valeur de pictureFile
+     *
+     * @return  File
+     */ 
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * Set the value of imageFile
+     *
+     * @param  File|\Symfony\Component\HttpFoundation\File\UploadedFile $pictureFile
+     *
+     */ 
+    public function setPictureFile(?File $pictureFile ): self
+    {
+        $this->pictureFile = $pictureFile;
+        if ($this->pictureFile instanceof UploadedFile) {
+            $this->updateAt = new \DateTime('now');
+        }
         return $this;
     }
 
@@ -399,5 +443,46 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->firstName,
+            $this->lastName,
+            $this->email,
+            $this->hash
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->firstName,
+            $this->LastName,
+            $this->email,
+            $this->hash
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 }
