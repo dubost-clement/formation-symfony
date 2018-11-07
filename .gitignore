@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/
@@ -24,3 +23,7 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-pack ###
 Makefile
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
