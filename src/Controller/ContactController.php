@@ -29,6 +29,11 @@ class ContactController extends AbstractController
             ;
 
             $mailer->send($message);
+
+            $this->addFlash(
+                'success',
+                'Votre email a bien été envoyé ! Nous vous répondrons dans les plus brefs délais'
+            );
         }
 
         return $this->render('contact/index.html.twig', [
